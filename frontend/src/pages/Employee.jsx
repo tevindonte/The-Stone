@@ -1,3 +1,4 @@
+// src/pages/Employee.js
 import React from 'react';
 import EmployeeDetail from '../components/EmployeeDetail';
 import logo from '../assets/Travelers_share.jpg'; // Import the logo
