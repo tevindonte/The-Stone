@@ -1,0 +1,1 @@
+mongoimport --uri mongodb://localhost:27017/entreprise --collection employees --file data.json --jsonArray --drop
