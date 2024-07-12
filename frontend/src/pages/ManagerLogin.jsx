@@ -1,13 +1,14 @@
+// src/pages/ManagerLogin.js
 import React, { useState } from 'react';
 import axios from 'axios';
 
 function ManagerLogin() {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('/api/login/manager', { username, password })
+    axios.post('/api/login/manager', { email, password })
       .then(response => {
         // handle login success
         console.log(response.data);
@@ -25,10 +26,10 @@ function ManagerLogin() {
       </header>
       <form onSubmit={handleLogin} className="login-form">
         <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
