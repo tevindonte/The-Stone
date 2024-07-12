@@ -4,6 +4,7 @@ import EmployeeList from '../components/EmployeeList';
 import axios from 'axios';
 import logo from '../assets/Travelers_share.jpg';
 
+
 function Home() {
   const [employees, setEmployees] = useState([]);
 
@@ -20,6 +21,17 @@ function Home() {
       </header>
       <SearchBar onSearch={handleSearch} />
       <EmployeeList employees={employees} />
+      <div className="login-buttons">
+        <Link to="/login/employee">
+          <button>Employee Login</button>
+        </Link>
+        <Link to="/login/manager">
+          <button>Manager Login</button>
+        </Link>
+        <Link to="/login/hr">
+          <button>HR Login</button>
+        </Link>
+      </div>
       <footer>
         &copy; 2024 Travelers Insurance
       </footer>

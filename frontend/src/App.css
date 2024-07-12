@@ -16,12 +16,12 @@ body {
 }
 
 h1, h2 {
-  color: #3a3a3a; 
+  color: #CC0000; /* Travelers red */
 }
 
 /* Header styles */
 header {
-  background-color: #CC0000;
+  background-color: #c90202;
   padding: 10px;
   color: white;
   text-align: center;
@@ -105,4 +105,11 @@ footer {
   right: 10px;
   width: 100px;
   height: auto;
+}
+
+/* Login buttons styles */
+.login-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
 }
