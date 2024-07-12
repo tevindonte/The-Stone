@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function EmployeeList({ employees }) {
   return (
-    <div>
+    <div className="employee-list">
       <h2>Employee Directory</h2>
       <ul>
         {employees.map((employee) => (

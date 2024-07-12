@@ -1,12 +1,58 @@
-.App {
+/* src/App.css */
+
+/* General styles */
+body {
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
   padding: 20px;
+  position: relative;
+  min-height: 100vh;
 }
 
 h1, h2 {
-  color: #333;
+  color: #3a3a3a; 
 }
 
+/* Header styles */
+header {
+  background-color: #CC0000;
+  padding: 10px;
+  color: white;
+  text-align: center;
+}
+
+/* Form styles */
+form {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #CC0000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a30000;
+}
+
+/* Employee List styles */
 ul {
   list-style: none;
   padding: 0;
@@ -14,25 +60,49 @@ ul {
 
 li {
   margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
 }
 
-form {
-  margin-bottom: 20px;
+li a {
+  text-decoration: none;
+  color: #CC0000;
 }
 
-input {
-  padding: 5px;
-  margin-right: 10px;
+li a:hover {
+  text-decoration: underline;
 }
 
-button {
-  padding: 5px 10px;
-  background-color: #007bff;
+/* Employee Detail styles */
+.employee-detail {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.employee-detail p {
+  margin: 10px 0;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333;
   color: white;
-  border: none;
-  cursor: pointer;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
-button:hover {
-  background-color: #0056b3;
+/* Logo styles */
+.logo {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 100px;
+  height: auto;
 }

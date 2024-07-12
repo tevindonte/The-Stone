@@ -15,7 +15,7 @@ function EmployeeDetail() {
   if (!employee) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="employee-detail">
       <h2>{employee.name}</h2>
       <p>Phone: {employee.phone}</p>
       <p>Job Role: {employee.jobRole}</p>

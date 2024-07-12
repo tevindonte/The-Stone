@@ -1,40 +1,29 @@
 import React, { useState } from 'react';
+import SearchBar from '../components/SearchBar';
+import EmployeeList from '../components/EmployeeList';
 import axios from 'axios';
 
-function Login() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+function Home() {
+  const [employees, setEmployees] = useState([]);
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    axios.post('/api/login', { username, password })
-      .then(response => {
-        // handle login success
-        console.log(response.data);
-      })
-      .catch(error => {
-        // handle login error
-        console.error(error);
-      });
+  const handleSearch = (query) => {
+    axios.get(`/api/employees?search=${query}`)
+      .then(response => setEmployees(response.data))
+      .catch(error => console.error(error));
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">Login</button>
-    </form>
+    <div>
+      <header>
+        <h1>Enterprise Directory</h1>
+      </header>
+      <SearchBar onSearch={handleSearch} />
+      <EmployeeList employees={employees} />
+      <footer>
+        &copy; 2024 Travelers Insurance
+      </footer>
+    </div>
   );
 }
 
-export default Login;
+export default Home;
