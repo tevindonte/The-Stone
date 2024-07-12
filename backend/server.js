@@ -18,33 +18,67 @@ app.use(express.json());
 const PORT = 3000;
 
 //employee result
-app.get('/employees/:id', async (req, res) => {
+app.get('/employees/:email', async (req, res) => {
     const client = await MongoClient.connect(url);
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
     const { id } = req.params;
     console.log(id);
-    const employee = await collection.find({"_id": new ObjectId(id)}).toArray();
+    const employee = await collection.findOne({"email": id});
     res.json(employee);
 });
 
+
+
+
 //manager result
-app.get('/manager/:id', async (req, res) => {
+app.get('/manager/:email', async (req, res) => {
     const client = await MongoClient.connect(url);
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
     const { id } = req.params;
     console.log(id);
-    const manager = await collection.find({"_id": new ObjectId(id)}).toArray();
-    const employee = await collection.find({"_id": new ObjectId(id)}).toArray();
-    res.json(employee);
+    try {
+        const manager = await collection.findOne({ "email": id });
+        
+        if (!manager) {
+            res.status(404).json({ error: 'Manager not found' });
+            return;
+        }
+        const managerEmployee = manager.managerEmployee;
+        console.log('managerEmployee:', managerEmployee);
+        const employee = await collection.findOne({"Name": managerEmployee});
+
+        const responseData = {
+            manager,
+            employee
+        };
+        res.json(responseData);
+    } catch (error) {
+        console.error('Error retrieving manager:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
 
 
 
 //human resources result
+app.get('/hr/search', async (req, res) => {
+    try {
 
+        const search = req.body;
 
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+        const results = await collection.find({ 'Name': search.Name }).toArray();
+
+        res.json(results); 
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 
@@ -58,7 +92,7 @@ app.get('/manager/:id', async (req, res) => {
 
 
 //employee login
-app.post('/socks/login', async (req, res) => {
+app.post('/employee/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
@@ -74,7 +108,7 @@ app.post('/socks/login', async (req, res) => {
 });
 
 //manager login
-app.post('/socks/login', async (req, res) => {
+app.post('/manager/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
@@ -91,7 +125,7 @@ app.post('/socks/login', async (req, res) => {
 
 
 //human resources login
-app.post('/socks/login', async (req, res) => {
+app.post('/hr/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
@@ -111,3 +145,4 @@ app.post('/socks/login', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+ 
