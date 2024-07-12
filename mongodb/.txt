@@ -1,1 +1,16 @@
 mongoimport --uri mongodb://localhost:27017/entreprise --collection employees --file data.json --jsonArray --drop
+
+mongosh 
+
+db.entreprise.insertOne({
+    "Name": "Bob Clark",
+    "Birth_Date": ISODate("1990-07-29T00:00:00.000Z"),
+    "Phone_Number": "(272) 420-1031",
+    "Job_Role": "Data Engineer",
+    "Work_Location": "Tokyo",
+    "Salary": 152715,
+    "Email": "jameswhite@example.org",
+    "Manager": "Yes",
+    "HR": "No",
+    "managerEmployee": "Sarah Clark"
+});
