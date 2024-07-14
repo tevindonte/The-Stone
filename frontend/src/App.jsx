@@ -12,14 +12,16 @@ import HR from './pages/HR';
 import './App.css';
 
 function App() {
+  const isLoggedIn = !!localStorage.getItem('userEmail');
+
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login/employee" element={<EmployeeLogin />} />
-          <Route path="/login/manager" element={<ManagerLogin />} />
-          <Route path="/login/hr" element={<HRLogin />} />
+          <Route path="/login/employee" element={isLoggedIn ? <Navigate to="/" /> : <EmployeeLogin />} />
+          <Route path="/login/manager" element={isLoggedIn ? <Navigate to="/" /> : <ManagerLogin />} />
+          <Route path="/login/hr" element={isLoggedIn ? <Navigate to="/" /> : <HRLogin />} />
 
           <Route path="/employeedashboard" element={<Employee />} />
           <Route path="managerdashboard" element={<Manager />} />

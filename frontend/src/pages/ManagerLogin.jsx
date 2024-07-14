@@ -15,7 +15,9 @@ function ManagerLogin() {
       .then(response => {
 
         console.log(response.data);
-        
+        const userEmail = response.data.email;
+        localStorage.removeItem('userEmail');
+        localStorage.setItem('userEmail', userEmail);
         navigate('/managerdashboard');
       })
       .catch(error => {
