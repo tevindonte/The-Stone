@@ -29,6 +29,10 @@ form {
   margin-bottom: 20px;
 }
 
+p {
+  text-align: center;
+}
+
 input {
   padding: 10px;
   margin-right: 10px;

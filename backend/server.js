@@ -92,50 +92,87 @@ app.get('/hr/search', async (req, res) => {
 
 
 //employee login
-app.post('/employee/login', async (req, res) => {
-    const { username, password } = req.body;
+app.post('/employees/login', async (req, res) => {
+    const { Email, Password } = req.body;
+    if (!Email || !Password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
     try {
-        const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
-        if (result.rows.length > 0) {
-            res.status(200).json({ uid: result.rows[0].uid });
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        const employee = await collection.findOne({ "Email" : Email });
+        if (employee && employee.Password === Password) {
+           
+            res.status(200).json({ message: 'Login successful' });
         } else {
             res.status(401).json({ message: 'Authentication failed' });
         }
     } catch (err) {
-        console.error(err);
+        console.error('Error during login:', err);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
 
+
 //manager login
 app.post('/manager/login', async (req, res) => {
-    const { username, password } = req.body;
-    try {
-        const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
-        if (result.rows.length > 0) {
-            res.status(200).json({ uid: result.rows[0].uid });
-        } else {
-            res.status(401).json({ message: 'Authentication failed' });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Internal server error' });
+    const { Email, Password, isManager } = req.body;
+    if (!Email || !Password) {
+      return res.status(400).json({ message: 'Email and password are required' });
     }
-});
+    try {
+      const client = await MongoClient.connect(url);
+      const db = client.db(dbName);
+      const collection = db.collection(collectionName);
+  
+      const employee = await collection.findOne({ "Email" : Email });
+      if (employee && employee.Password === Password) {
+        if (isManager && employee.Manager === "Yes") {
+          res.status(200).json({ message: 'Manager Login successful' });
+        } else if (!isManager && employee.Manager === "No") {
+          res.status(401).json({ message: 'Employee Login unsuccessful' });
+        } else {
+          res.status(401).json({ message: 'Authentication failed' });
+        }
+      } else {
+        res.status(401).json({ message: 'Authentication failed' });
+      }
+    } catch (err) {
+      console.error('Error during login:', err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+
 
 
 //human resources login
 app.post('/hr/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { Email, Password, isHR } = req.body;
+    if (!Email || !Password) {
+        return res.status(400).json({ message: 'Email and password are required' });
+    }
     try {
-        const result = await pool.query('SELECT uid FROM users WHERE username = $1 AND password = $2', [username, password]);
-        if (result.rows.length > 0) {
-            res.status(200).json({ uid: result.rows[0].uid });
+        const client = await MongoClient.connect(url);
+        const db = client.db(dbName);
+        const collection = db.collection(collectionName);
+
+        const employee = await collection.findOne({ "Email" : Email });
+        if (employee && employee.Password === Password) {
+            if (isHR && employee.HR === "Yes") {
+                res.status(200).json({ message: 'HR Login successful' });
+            } else if (!isHR && employee.HR === "No") {
+                res.status(401).json({ message: 'Employee Login unsuccessful' });
+            } else {
+                res.status(401).json({ message: 'Authentication failed' });
+            }
         } else {
             res.status(401).json({ message: 'Authentication failed' });
         }
     } catch (err) {
-        console.error(err);
+        console.error('Error during login:', err);
         res.status(500).json({ message: 'Internal server error' });
     }
 });

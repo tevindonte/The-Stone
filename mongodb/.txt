@@ -1,16 +1,45 @@
 mongoimport --uri mongodb://localhost:27017/entreprise --collection employees --file data.json --jsonArray --drop
 
-mongosh 
 
-db.entreprise.insertOne({
-    "Name": "Bob Clark",
-    "Birth_Date": ISODate("1990-07-29T00:00:00.000Z"),
-    "Phone_Number": "(272) 420-1031",
-    "Job_Role": "Data Engineer",
-    "Work_Location": "Tokyo",
-    "Salary": 152715,
-    "Email": "jameswhite@example.org",
-    "Manager": "Yes",
-    "HR": "No",
-    "managerEmployee": "Sarah Clark"
-});
+
+Employee Example
+"Name":"Tanner Young",
+"Birth_Date":"1982-07-07T00:00:00.000",
+"Phone_Number":"(807) 428-1522",
+"Job_Role":"Cyber Security",
+"Work_Location":"Texas",
+"Salary":230234,
+"Email":"ashleyadams@example.org",
+"Manager":"No",
+"HR":"No",
+"managerEmployee":null,
+"Password":"iCL=<|I}G|"
+
+
+
+HR Example
+"Name":"Lisa Davis",
+"Birth_Date":"1998-11-11T00:00:00.000",
+"Phone_Number":"(518) 294-0760",
+"Job_Role":"IT Specialist",
+"Work_Location":"New York",
+"Salary":126034,
+"Email":"terrylaura@example.com",
+"Manager":"No",
+"HR":"Yes",
+"managerEmployee":null,
+"Password":"LP32a$k@+r"
+
+
+_id 66940525179cd4d01387448f
+Name "Zoe Reed"
+Birth_Date "1982-06-10T00:00:00.000"
+Phone_Number "(828) 796-1621"
+Job_Role "Data Analyst"
+Work_Location "San Francisco"
+Salary 86185
+Email "lauraochoa@example.net"
+Manager "Yes"
+HR "No"
+managerEmployee "Lauren Francis"
+Password "(|T!2t;+*l"

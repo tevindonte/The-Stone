@@ -1,8 +1,7 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function EmployeeDetail({  }) {
+function HRDetail ({  }) {
   return (
     <div className="employee-list">
       <h2>Employee Directory</h2>
@@ -13,4 +12,4 @@ function EmployeeDetail({  }) {
   );
 }
 
-export default EmployeeDetail;
+export default HRDetail;
