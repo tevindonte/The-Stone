@@ -55,10 +55,10 @@ function HR() {
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search by name"
         />
-        <button onClick={handleSearch}>Search</button>
         <button onClick={handleLogout}>Logout</button>
         <HRDetail employee={employee} />
       </header>
+      <button onClick={handleSearch}>Search</button>
       <footer>
         &copy; 2024 Travelers Insurance
       </footer>
