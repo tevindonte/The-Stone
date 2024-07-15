@@ -26,6 +26,7 @@ function HR() {
   }, []);
 
   const handleLogout = () => {
+    localStorage.clear();
     localStorage.removeItem('userEmail');
     setEmployee(null);
     navigate('/');

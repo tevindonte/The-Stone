@@ -22,9 +22,10 @@ app.get('/employees/:email', async (req, res) => {
     const client = await MongoClient.connect(url);
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-    const { id } = req.params;
-    console.log(id);
-    const employee = await collection.findOne({"email": id});
+    const { email } = req.params;
+    console.log(req.params)
+    console.log(email);
+    const employee = await collection.findOne({"Email": email});
     res.json(employee);
 });
 
@@ -36,10 +37,10 @@ app.get('/manager/:email', async (req, res) => {
     const client = await MongoClient.connect(url);
     const db = client.db(dbName);
     const collection = db.collection(collectionName);
-    const { id } = req.params;
-    console.log(id);
+    const { email } = req.params;
+    console.log(email);
     try {
-        const manager = await collection.findOne({ "email": id });
+        const manager = await collection.findOne({ "Email": email });
         
         if (!manager) {
             res.status(404).json({ error: 'Manager not found' });
