@@ -12,8 +12,9 @@ function EmployeeLogin() {
     try {
       const response = await axios.post('http://localhost:3000/employees/login', { Email, Password });
       console.log(response.data); 
-      const userEmail = response.data.email;
+      const userEmail = Email;
       localStorage.removeItem('userEmail');
+      localStorage.clear();
       localStorage.setItem('userEmail', userEmail);
       navigate('/employeedashboard');
     } catch (error) {

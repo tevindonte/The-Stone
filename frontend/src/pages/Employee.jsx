@@ -11,6 +11,7 @@ function Employee() {
   const navigate = useNavigate();
   useEffect(() => {
     const userEmail = localStorage.getItem('userEmail');
+    console.log("This is the email", userEmail)
     if (userEmail) {
       axios.get(`http://localhost:3000/employees/${userEmail}`)
         .then(response => {
@@ -25,6 +26,7 @@ function Employee() {
   }, []);
 
   const handleLogout = () => {
+    localStorage.clear();
     localStorage.removeItem('userEmail');
     setEmployee(null);
     navigate('/');

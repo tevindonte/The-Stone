@@ -14,9 +14,12 @@ function HRLogin() {
     axios.post('http://localhost:3000/hr/login', { Email, Password, isHR })
       .then(response => {
         console.log(response.data);
-        const userEmail = response.data.email;
+        const userEmail = Email;
         localStorage.removeItem('userEmail');
+        localStorage.clear();
+        
         localStorage.setItem('userEmail', userEmail);
+        console.log("This is email", localStorage);
         navigate('/hrdashboard');
       })
       .catch(error => {
