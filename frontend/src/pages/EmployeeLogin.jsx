@@ -1,10 +1,12 @@
 // src/pages/EmployeeLogin.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function EmployeeLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -12,6 +14,7 @@ function EmployeeLogin() {
       .then(response => {
         // handle login success
         console.log(response.data);
+        navigate('/dashboard/employee'); // Navigate to Employee Dashboard
       })
       .catch(error => {
         // handle login error
