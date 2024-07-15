@@ -42,8 +42,16 @@ body {
     background-color: #a30000;
   }
   
-  /* Manager Detail styles */
-  .manager-details {
+  /* Details container styles */
+  .details-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .manager-details, .employee-details {
+    flex: 1;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -53,7 +61,11 @@ body {
     margin: 20px auto;
   }
   
-  .manager-details p {
+  .manager-details h2, .employee-details h2 {
+    color: #ffffff;
+  }
+  
+  .manager-details p, .employee-details p {
     margin: 10px 0;
   }
   
