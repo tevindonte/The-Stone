@@ -12,6 +12,7 @@ function Manager() {
 
   useEffect(() => {
     const userEmail = localStorage.getItem('userEmail');
+    console.log(userEmail)
     if (userEmail) {
       axios.get(`http://localhost:3000/manager/${userEmail}`)
         .then(response => {

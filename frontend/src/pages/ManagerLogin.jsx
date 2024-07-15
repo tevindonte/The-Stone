@@ -15,7 +15,7 @@ function ManagerLogin() {
       .then(response => {
 
         console.log(response.data);
-        const userEmail = response.data.email;
+        const userEmail = Email;
         localStorage.removeItem('userEmail');
         localStorage.clear();
         localStorage.setItem('userEmail', userEmail);

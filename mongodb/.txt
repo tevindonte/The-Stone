@@ -43,3 +43,10 @@ Manager "Yes"
 HR "No"
 managerEmployee "Lauren Francis"
 Password "(|T!2t;+*l"
+
+
+Manager works as expected
+our data unfortunately doesn't have 
+a manager where the employee of the 
+manager is actually present in the database
+so we would have to manually add that
