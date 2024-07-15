@@ -1,20 +1,27 @@
 // src/pages/ManagerLogin.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 function ManagerLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [isManager, setIsManager] = useState(false); 
+  const navigate = useNavigate(); 
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('/api/login/manager', { email, password })
+    axios.post('http://localhost:3000/manager/login', { Email, Password, isManager })
       .then(response => {
-        // handle login success
+
         console.log(response.data);
+        const userEmail = response.data.email;
+        localStorage.removeItem('userEmail');
+        localStorage.setItem('userEmail', userEmail);
+        navigate('/managerdashboard');
       })
       .catch(error => {
-        // handle login error
+
         console.error(error);
       });
   };
@@ -28,15 +35,23 @@ function ManagerLogin() {
         <input
           type="email"
           placeholder="Email"
-          value={email}
+          value={Email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
-          value={password}
+          value={Password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <div>
+     <p>Are you Manager?</p>
+          <input
+            type="checkbox"
+            checked={isManager}
+            
+            onChange={() => setIsManager(!isManager)}
+          /></div>
         <button type="submit">Login</button>
       </form>
       <footer>

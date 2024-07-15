@@ -1,20 +1,25 @@
 // src/pages/HRLogin.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 function HRLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const [isHR, setIsHR] = useState(false); 
+  const navigate = useNavigate(); 
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post('/api/login/hr', { email, password })
+    axios.post('http://localhost:3000/hr/login', { Email, Password, isHR })
       .then(response => {
-        // handle login success
         console.log(response.data);
+        const userEmail = response.data.email;
+        localStorage.removeItem('userEmail');
+        localStorage.setItem('userEmail', userEmail);
+        navigate('/hrdashboard');
       })
       .catch(error => {
-        // handle login error
         console.error(error);
       });
   };
@@ -28,15 +33,25 @@ function HRLogin() {
         <input
           type="email"
           placeholder="Email"
-          value={email}
+          value={Email}
           onChange={(e) => setEmail(e.target.value)}
         />
+        
+          
         <input
           type="password"
           placeholder="Password"
-          value={password}
+          value={Password}
           onChange={(e) => setPassword(e.target.value)}
-        />
+        /><div>
+     <p>Are you hr?</p>
+          <input
+            type="checkbox"
+            checked={isHR}
+            
+            onChange={() => setIsHR(!isHR)}
+          /></div>
+          
         <button type="submit">Login</button>
       </form>
       <footer>

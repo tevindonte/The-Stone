@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function EmployeeDetail() {
+function EmployeeList() {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
 
@@ -26,4 +26,4 @@ function EmployeeDetail() {
   );
 }
 
-export default EmployeeDetail;
+export default EmployeeList;
