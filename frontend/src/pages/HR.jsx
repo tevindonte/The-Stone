@@ -9,7 +9,8 @@ import { useNavigate } from 'react-router-dom';
 function HR() {
   const [employee, setEmployee] = useState(null);
   const navigate = useNavigate();
-
+  const [searchTerm, setSearchTerm] = useState('');
+  
   useEffect(() => {
     const userEmail = localStorage.getItem('userEmail');
     if (userEmail) {
@@ -25,6 +26,17 @@ function HR() {
     }
   }, []);
 
+  const handleSearch = () => {
+    axios.get(`http://localhost:3000/hr/search?query=${searchTerm}`)
+      .then(response => {
+        console.log('Search results:', response.data);
+        setEmployee(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  };
+
   const handleLogout = () => {
     localStorage.clear();
     localStorage.removeItem('userEmail');
@@ -37,6 +49,13 @@ function HR() {
     <div className="App">
       <header>
         <h1>Employee Detail</h1>
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          placeholder="Search by name"
+        />
+        <button onClick={handleSearch}>Search</button>
         <button onClick={handleLogout}>Logout</button>
         <HRDetail employee={employee} />
       </header>

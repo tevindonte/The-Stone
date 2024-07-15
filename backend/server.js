@@ -66,21 +66,20 @@ app.get('/manager/:email', async (req, res) => {
 //human resources result
 app.get('/hr/search', async (req, res) => {
     try {
-
-        const search = req.body;
+        const { query } = req.query;
 
         const client = await MongoClient.connect(url);
         const db = client.db(dbName);
         const collection = db.collection(collectionName);
-        const results = await collection.find({ 'Name': search.Name }).toArray();
 
-        res.json(results); 
+        const results = await collection.find({ 'Name': { $regex: new RegExp(query, 'i') } }).toArray();
+
+        res.json(results);
     } catch (err) {
         console.error('Error:', err);
         res.status(500).send('Internal Server Error');
     }
 });
-
 
 
 
