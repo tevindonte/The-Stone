@@ -1,22 +1,25 @@
-// src/pages/EmployeeLogin.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 function EmployeeLogin() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleLogin = (e) => {
+  const [Email, setEmail] = useState('');
+  const [Password, setPassword] = useState('');
+  const navigate = useNavigate(); 
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios.post('/api/login/employee', { email, password })
-      .then(response => {
-        // handle login success
-        console.log(response.data);
-      })
-      .catch(error => {
-        // handle login error
-        console.error(error);
-      });
+    try {
+      const response = await axios.post('http://localhost:3000/employees/login', { Email, Password });
+      console.log(response.data); 
+      const userEmail = response.data.email;
+      localStorage.removeItem('userEmail');
+      localStorage.setItem('userEmail', userEmail);
+      navigate('/employeedashboard');
+    } catch (error) {
+      console.error('Error during login:', error);
+
+    }
   };
 
   return (
@@ -28,13 +31,13 @@ function EmployeeLogin() {
         <input
           type="email"
           placeholder="Email"
-          value={email}
+          value={Email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
-          value={password}
+          value={Password}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Login</button>
