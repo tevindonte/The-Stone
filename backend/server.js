@@ -41,7 +41,7 @@ app.get('/manager/:email', async (req, res) => {
     console.log(email);
     try {
         const manager = await collection.findOne({ "Email": email });
-        
+        console.log("Getting manager data");
         if (!manager) {
             res.status(404).json({ error: 'Manager not found' });
             return;

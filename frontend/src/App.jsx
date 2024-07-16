@@ -24,8 +24,8 @@ function App() {
           <Route path="/login/hr" element={isLoggedIn ? <Navigate to="/" /> : <HRLogin />} />
 
           <Route path="/employeedashboard" element={<Employee />} />
-          <Route path="managerdashboard" element={<Manager />} />
-          <Route path="hrdashboard" element={<HR />} />
+          <Route path="/managerdashboard" element={<Manager />} />
+          <Route path="/hrdashboard" element={<HR />} />
         </Routes>
       </div>
     </Router>

@@ -41,7 +41,7 @@ Salary 86185
 Email "lauraochoa@example.net"
 Manager "Yes"
 HR "No"
-managerEmployee "Lauren Francis"
+managerEmployee "Tanner Young"
 Password "(|T!2t;+*l"
 
 db.employees.insertOne({
